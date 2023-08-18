@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+<config xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <ServerProtocol>https</ServerProtocol>
+  <ServerAddr></ServerAddr>
+  <ServerPort>443</ServerPort>
+  <ServerSubUrl>/resto</ServerSubUrl>
+  <ChainServerProtocol>https</ChainServerProtocol>
+  <ChainServerAddr>localhost</ChainServerAddr>
+  <ChainServerPort>9080</ChainServerPort>
+  <ChainServerSubUrl>/resto</ChainServerSubUrl>
+  <ServersList>
+    <ServerName></ServerName>
+    <Edition>default</Edition>
+    <Version></Version>
+    <ComputerName></ComputerName>
+    <ServerState></ServerState>
+    <Protocol>https</Protocol>
+    <ServerAddr></ServerAddr>
+    <ServerSubUrl>/resto</ServerSubUrl>
+    <Port></Port>
+    <IsPresent>true</IsPresent>
+  </ServersList>
+  <serverChooserIsOpened>true</serverChooserIsOpened>
+  <Login>admin</Login>
+  <Update>
+    <Url>update</Url>
+  </Update>
+  <SaveLogin>true</SaveLogin>
+  <ShouldGroupGoodMoveReport>true</ShouldGroupGoodMoveReport>
+  <crashReportServerAddr>https://sevilia.glowbyte.com/restobugs/crash.php</crashReportServerAddr>
+  <OneCExportPath>C:\1C</OneCExportPath>
+  <NomenclatureExportFileName></NomenclatureExportFileName>
+  <NomenclatureImportFileName></NomenclatureImportFileName>
+  <MenuOpenGroupName>Доставка</MenuOpenGroupName>
+  <NavPanelDockVisibility>Visible</NavPanelDockVisibility>
+  <ProductionOrderLastBlank xsi:nil="true" />
+  <OrderPropertiesPosition />
+  <OrderPropertiesFio />
+  <ShowProductEditor>false</ShowProductEditor>
+  <ShowPositions>false</ShowPositions>
+  <ShowMenu />
+  <MenuChangesSplitterWidth xsi:nil="true" />
+  <RoundPercent xsi:nil="true" />
+  <needSubstituteSupplierPrice>true</needSubstituteSupplierPrice>
+  <ModificatorsIsProcessed>false</ModificatorsIsProcessed>
+  <NeedSubstituteLastInvoiceDate>false</NeedSubstituteLastInvoiceDate>
+  <UseSupplierProducts>false</UseSupplierProducts>
+  <LastInvoiceDate xsi:nil="true" />
+  <needSubstituteLastInvoiceStore>false</needSubstituteLastInvoiceStore>
+  <LastInvoiceStore xsi:nil="true" />
+  <GoodsMoveShowNds xsi:nil="true" />
+  <GoodsMoveShowAmount xsi:nil="true" />
+  <ReplaceInGroupActionForm>false</ReplaceInGroupActionForm>
+  <ResortOnNomenclatureCacheUpdate>true</ResortOnNomenclatureCacheUpdate>
+  <AutoUpdateNomenclature>true</AutoUpdateNomenclature>
+  <UpdateCacheAfterReconnection>false</UpdateCacheAfterReconnection>
+  <CheckObjectInCacheForConverter>false</CheckObjectInCacheForConverter>
+  <ServiceMode>TABLE_SERVICE</ServiceMode>
+  <MaxUserPhotoWidth>600</MaxUserPhotoWidth>
+  <MaxUserPhotoHeight>600</MaxUserPhotoHeight>
+  <ProductPhotoMaxWidth>600</ProductPhotoMaxWidth>
+  <ProductPhotoMaxHeight>600</ProductPhotoMaxHeight>
+  <RecomputeSteadySalary>false</RecomputeSteadySalary>
+  <RecomputeSalaryDates>
+    <item>
+      <key>
+        <string>start</string>
+      </key>
+      <value>
+        <dateTime xsi:nil="true" />
+      </value>
+    </item>
+    <item>
+      <key>
+        <string>finish</string>
+      </key>
+      <value>
+        <dateTime xsi:nil="true" />
+      </value>
+    </item>
+  </RecomputeSalaryDates>
+  <UICultureName>ru-RU</UICultureName>
+  <ShowGroupsHierarchyForProductInCompletion>true</ShowGroupsHierarchyForProductInCompletion>
+  <ShowPaidInvoices>false</ShowPaidInvoices>
+  <ShowPaidOutgoingDocuments>false</ShowPaidOutgoingDocuments>
+  <backVersion></backVersion>
+  <KeepAliveHttpWebRequestFlag>false</KeepAliveHttpWebRequestFlag>
+  <RepeatCallsServerCount>0</RepeatCallsServerCount>
+  <RepeatCallsServerTimeoutIsMs>500</RepeatCallsServerTimeoutIsMs>
+  <AutoUpdateAnnouncements>true</AutoUpdateAnnouncements>
+  <IikoNewsRssUrl />
+  <IikoNewsCacheMinutes>60</IikoNewsCacheMinutes>
+  <deliveryCustomersCanBeExportedToExcel>true</deliveryCustomersCanBeExportedToExcel>
+  <DeliveryAggregationFieldsVisible>true</DeliveryAggregationFieldsVisible>
+  <DailyCacheSaving>true</DailyCacheSaving>
+  <CacheSavingPeriod>5</CacheSavingPeriod>
+  <CacheSavingMinutesTime>480</CacheSavingMinutesTime>
+  <canArchiveCache>true</canArchiveCache>
+  <ServerFingerPrintsInfo>
+    <CrmId>2605377</CrmId>
+    <HwId>$4.4$053f87394cb97a2d22ed14afdae7cd7a72caa13c</HwId>
+    <DbId>441738c1-3381-3a57-0180-703b76a900af</DbId>
+    <InstallationPath>/usr/local/tomcat/RMS-DATA</InstallationPath>
+  </ServerFingerPrintsInfo>
+  <GalleryUrl>https://templates.iiko.online</GalleryUrl>
+  <IikoNetOperationTimeoutSeconds xsi:nil="true" />
+  <IikoNetEndpointIdentity>iiko.net</IikoNetEndpointIdentity>
+  <StiSubreportSettingsPrintOnPreviousPage>false</StiSubreportSettingsPrintOnPreviousPage>
+  <SyncReportDockPanelHeight xsi:nil="true" />
+  <TraceAbcXyzAnalysis>false</TraceAbcXyzAnalysis>
+  <YandexUrlMaskv2>http://maps\.yandex\.(?&lt;domain&gt;\w{2,9})/(export/usermaps/(?&lt;id&gt;(-|\w)+)/?|\?um=(?&lt;id&gt;(-|\w)+)\S*)</YandexUrlMaskv2>
+  <YandexUrlFormatv2>http://maps.yandex.{domain}/export/usermaps/{id}/</YandexUrlFormatv2>
+  <GoogleUrlMaskv2>https://.*\.google\.(?&lt;domain&gt;\w{2,9}?)/.*id=(?&lt;id&gt;([^?&amp;])+)</GoogleUrlMaskv2>
+  <GoogleUrlFormatv2>https://www.google.{domain}/maps/d/view?mid={id}</GoogleUrlFormatv2>
+  <EnableOzekiLog>false</EnableOzekiLog>
+  <audioDevicesDetectionTimeout>00:00:05</audioDevicesDetectionTimeout>
+</config>

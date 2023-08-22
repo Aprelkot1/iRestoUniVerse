@@ -434,86 +434,94 @@ namespace iRestoUniVerse
         }
         public void OpenIiko(string pathToIiko, string tmpFolderName, string protocol, string address, string port, bool isChain)
         {
-            var pathToAppData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            string pathToTmpFolder = isChain ? System.IO.Path.Combine(pathToAppData, @"iiko\Chain", tmpFolderName)
-                : System.IO.Path.Combine(pathToAppData, @"iiko\Rms", tmpFolderName);
-            var configFile = Environment.CurrentDirectory + @"\backclient.config.xml";
-            if (!File.Exists(configFile)) throw new FileNotFoundException($"{configFile} не найден, верните его в папку программы.");
-            Directory.CreateDirectory(pathToTmpFolder);
-            var pathToConfigFolder = System.IO.Path.Combine(pathToTmpFolder, @"config");
-            Directory.CreateDirectory(pathToConfigFolder);
-            var fileName = System.IO.Path.GetFileName(configFile);
-            var destFile = System.IO.Path.Combine(pathToConfigFolder, fileName);
-            if (!Directory.Exists(pathToTmpFolder)) // если уже есть то просто запускаем айку
+            try
             {
-                // создаем папки и копируем конфиг файл (он должен лежать в папке проги)
-
-                File.Copy(configFile, destFile, true);
-                // парсим destFile и заменяем адрес сервера, порт и протокол
-
-                xBackConfig = XDocument.Load(destFile);
-                XElement config = xBackConfig.Element("config");
-                XElement serverList = config.Element("ServersList");
-                XElement serverAddr = serverList.Element("ServerAddr");
-                XElement Iprotocol = serverList.Element("Protocol");
-                XElement Iport = serverList.Element("Port");
-                XElement edition = serverList.Element("Edition");
-
-                serverAddr.Value = address;
-                Iprotocol.Value = protocol;
-                Iport.Value = port;
-                if (isChain) edition.Value = "chain"; // для чейна как оказалось нужно еще одно поле поменять
-                xBackConfig.Save(destFile);
-
-
-
-            }
-            else
-            {
-                if (!File.Exists(destFile + "/" + configFile))
+                var pathToAppData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+                string pathToTmpFolder = isChain ? System.IO.Path.Combine(pathToAppData, @"iiko\Chain", tmpFolderName)
+                    : System.IO.Path.Combine(pathToAppData, @"iiko\Rms", tmpFolderName);
+                var configFile = System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\backclient.config.xml";
+                if (!File.Exists(configFile)) throw new FileNotFoundException($"{configFile} не найден, верните его в папку программы.");
+                Directory.CreateDirectory(pathToTmpFolder);
+                var pathToConfigFolder = System.IO.Path.Combine(pathToTmpFolder, @"config");
+                Directory.CreateDirectory(pathToConfigFolder);
+                var fileName = System.IO.Path.GetFileName(configFile);
+                var destFile = System.IO.Path.Combine(pathToConfigFolder, fileName);
+                if (!Directory.Exists(pathToTmpFolder)) // если уже есть то просто запускаем айку
                 {
+                    // создаем папки и копируем конфиг файл (он должен лежать в папке проги)
+
                     File.Copy(configFile, destFile, true);
-                }
-                xBackConfig = XDocument.Load(destFile);
-                XElement config = xBackConfig.Element("config");
-                XElement serverAddr47 = config.Element("ServerAddr");
-                XElement serverPort47 = config.Element("ServerPort");
-                XElement serverList = config.Element("ServersList");
-                XElement serverAddr = serverList.Element("ServerAddr");
-                XElement iikoProtocol = serverList.Element("Protocol");
-                XElement iikoPort = serverList.Element("Port");
-                XElement edition = serverList.Element("Edition");
-                XElement chainAddr47 = config.Element("ChainServerAddr");
-                XElement chainPort47 = config.Element("ChainServerPort");
-                iikoProtocol.Value = protocol.ToLower();
-                if (isChain)
-                {
-                    edition.Value = "chain"; ;
-                }// для чейна как оказалось нужно еще одно поле поменять
+                    // парсим destFile и заменяем адрес сервера, порт и протокол
 
-                if (serverAddr.Value != address || iikoPort.Value != port)
-                {
-                    iikoPort.Value = port;
+                    xBackConfig = XDocument.Load(destFile);
+                    XElement config = xBackConfig.Element("config");
+                    XElement serverList = config.Element("ServersList");
+                    XElement serverAddr = serverList.Element("ServerAddr");
+                    XElement Iprotocol = serverList.Element("Protocol");
+                    XElement Iport = serverList.Element("Port");
+                    XElement edition = serverList.Element("Edition");
+
                     serverAddr.Value = address;
-                    chainAddr47.Value = address;
-                    chainPort47.Value = port;
+                    Iprotocol.Value = protocol;
+                    Iport.Value = port;
+                    if (isChain) edition.Value = "chain"; // для чейна как оказалось нужно еще одно поле поменять
+                    xBackConfig.Save(destFile);
+
 
 
                 }
-                xBackConfig.Save(destFile);
+                else
+                {
+                    if (!File.Exists(destFile + "/" + configFile))
+                    {
+                        File.Copy(configFile, destFile, true);
+                    }
+                    xBackConfig = XDocument.Load(destFile);
+                    XElement config = xBackConfig.Element("config");
+                    XElement serverAddr47 = config.Element("ServerAddr");
+                    XElement serverPort47 = config.Element("ServerPort");
+                    XElement serverList = config.Element("ServersList");
+                    XElement serverAddr = serverList.Element("ServerAddr");
+                    XElement iikoProtocol = serverList.Element("Protocol");
+                    XElement iikoPort = serverList.Element("Port");
+                    XElement edition = serverList.Element("Edition");
+                    XElement chainAddr47 = config.Element("ChainServerAddr");
+                    XElement chainPort47 = config.Element("ChainServerPort");
+                    iikoProtocol.Value = protocol.ToLower();
+                    if (isChain)
+                    {
+                        edition.Value = "chain"; ;
+                    }// для чейна как оказалось нужно еще одно поле поменять
 
-            }
+                    if (serverAddr.Value != address || iikoPort.Value != port)
+                    {
+                        iikoPort.Value = port;
+                        serverAddr.Value = address;
+                        chainAddr47.Value = address;
+                        chainPort47.Value = port;
 
-            var process = new Process
-            {
 
-                StartInfo =
+                    }
+                    xBackConfig.Save(destFile);
+
+                }
+
+                var process = new Process
+                {
+
+                    StartInfo =
                 {
                   FileName = pathToIiko,
                   Arguments = $"/AdditionalTmpFolder=\"{tmpFolderName}\""
                 }
-            };
-            process.Start();
+                };
+            
+            
+                process.Start();
+            }catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.Message.ToString());
+            }
         }
         private void createOrganization_Click(object sender, EventArgs e)
         {

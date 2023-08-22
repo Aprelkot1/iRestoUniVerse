@@ -72,9 +72,9 @@ namespace iRestoUniVerse
         }
         public void UpdateXML()
         {
-            if (File.Exists("configOrganization.xml"))
+            if (File.Exists(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\configOrganization.xml"))
             {
-                xdocOrg = XDocument.Load("configOrganization.xml");
+                xdocOrg = XDocument.Load(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\configOrganization.xml");
                 // получаем корневой узел
                 organizationsXML = xdocOrg.Element("organizations");
                 foreach (var org in organizationsXML.Elements("org"))
@@ -88,42 +88,43 @@ namespace iRestoUniVerse
                         org.Add(new XElement("tmpFolderOrg", Converter.ConvertToLatin(org.Attribute("name").Value.ToString())));
                     }
                 }
-                xdocOrg.Save("configOrganization.xml");
+                xdocOrg.Save(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\configOrganization.xml");
             }
 
         }
         public void LoadXML()
         {
-            if (!File.Exists("configOrganization.xml"))
+            System.Windows.MessageBox.Show(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\configOrganization.xml");
+            if (!File.Exists(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "configOrganization.xml"))
             {
                 XDocument newDocOrg = new XDocument();
                 newDocOrg.Add(new XElement("organizations"));
-                newDocOrg.Save("configOrganization.xml");
+                newDocOrg.Save(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\configOrganization.xml");
             }
-            if (!File.Exists("configFTPIiko.xml"))
+            if (!File.Exists(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\configFTPIiko.xml"))
             {
                 XDocument newDocFTP = new XDocument();
                 newDocFTP.Add(new XElement("iikoFTP"));
                 XElement iikoFTPX = newDocFTP.Element("iikoFTP");
                 iikoFTPX.Add(new XElement("distrDir"),
                     new XElement("portableDir"));
-                newDocFTP.Save("configFTPIiko.xml");
+                newDocFTP.Save(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\configFTPIiko.xml");
             }
-            if (!File.Exists("configIikoVersion.xml"))
+            if (!File.Exists(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\configOrganization.xml"))
             {
                 XDocument newVerOrg = new XDocument();
                 newVerOrg.Add(new XElement("iikoVersions"));
-                newVerOrg.Save("configIikoVersion.xml");
+                newVerOrg.Save(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\configOrganization.xml");
             }
             //загружаем документ с версиями BackOffice
-            xdocBackVer = XDocument.Load("configIikoVersion.xml");
+            xdocBackVer = XDocument.Load(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\configIikoVersion.xml");
             iikoVersionsXML = xdocBackVer.Element("iikoVersions");
             //загружаем документ с организациями
-            xdocOrg = XDocument.Load("configOrganization.xml");
+            xdocOrg = XDocument.Load(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\configOrganization.xml");
             // получаем корневой узел
             organizationsXML = xdocOrg.Element("organizations");
             XDocument xdocFTP = new XDocument();
-            xdocFTP = XDocument.Load("configFTPIiko.xml");
+            xdocFTP = XDocument.Load(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\configFTPIiko.xml");
             XElement iikoFTP = xdocFTP.Element("iikoFTP");
             XElement distrDir = iikoFTP.Element("distrDir");
             if (distrDir != null)
@@ -192,7 +193,7 @@ namespace iRestoUniVerse
                 }
 
 
-                xdocBackVer.Save("configIikoVersion.xml");
+                xdocBackVer.Save(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\configIikoVersion.xml");
                 iikoVersionsOut();
             }
         }
@@ -230,18 +231,18 @@ namespace iRestoUniVerse
             var result = FBD.ShowDialog();
             iikoDistrDirBox.Text = (FBD.SelectedPath);
             XDocument xdocFTP = new XDocument();
-              xdocFTP = XDocument.Load("configFTPIiko.xml");
+              xdocFTP = XDocument.Load(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\configFTPIiko.xml");
             XElement iikoFTP = xdocFTP.Element("iikoFTP");
             XElement distrDir = iikoFTP.Element("distrDir");
             distrDir.Value = iikoDistrDirBox.Text;
-            xdocFTP.Save("configFTPIiko.xml");
+            xdocFTP.Save(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\configFTPIiko.xml");
 
 
         }
         public void openIikoDistr_Click(object sender, EventArgs e)
         {
             XDocument xdocFTP = new XDocument();
-            xdocFTP = XDocument.Load("configFTPIiko.xml");
+            xdocFTP = XDocument.Load(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\configFTPIiko.xml");
             XElement iikoFTP = xdocFTP.Element("iikoFTP");
             XElement distrDir = iikoFTP.Element("distrDir");
             Process.Start("explorer.exe", distrDir.Value.ToString());
@@ -285,7 +286,7 @@ namespace iRestoUniVerse
                 }
 
             }
-            xdocBackVer.Save("configIikoVersion.xml");
+            xdocBackVer.Save(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\configIikoVersion.xml");
             iikoVersionsOut();
         }
 
@@ -381,7 +382,7 @@ namespace iRestoUniVerse
                             tag.SelectedItem = iikoVersionStart.SelectedItem;
                             iikoVerOrgStart.Value = tag.SelectedItem.ToString();
                         }
-                        xdocOrg.Save("configOrganization.xml");
+                        xdocOrg.Save(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\configOrganization.xml");
                     }
                 }
             }
@@ -568,7 +569,7 @@ namespace iRestoUniVerse
 
 
             }
-            xdocOrg.Save("configOrganization.xml");
+            xdocOrg.Save(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\configOrganization.xml");
             organizationOut();
         }
         private void removeOrg_Click(object sender, EventArgs e)
@@ -607,7 +608,7 @@ namespace iRestoUniVerse
                         }
                     }
                     orgName.Remove();
-                    xdocOrg.Save("configOrganization.xml");
+                    xdocOrg.Save(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\configOrganization.xml");
 
                 }
 
@@ -635,7 +636,7 @@ namespace iRestoUniVerse
                             {
                                 XElement orgComment = org.Element("comments");
                                 orgComment.Value = childType.Text;
-                                organizationsXML.Save("configOrganization.xml");
+                                organizationsXML.Save(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\configOrganization.xml");
                                 organizationOut();
                             }
 
@@ -650,7 +651,7 @@ namespace iRestoUniVerse
                             {
                                 XElement orgPort = org.Element("port");
                                 orgPort.Value = childType.Text;
-                                organizationsXML.Save("configOrganization.xml");
+                                organizationsXML.Save(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\configOrganization.xml");
                                 organizationOut();
                             }
 
@@ -665,7 +666,7 @@ namespace iRestoUniVerse
                             {
                                 XAttribute orgName = org.Attribute("name");
                                 orgName.Value = childType.Text;
-                                organizationsXML.Save("configOrganization.xml");
+                                organizationsXML.Save(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\configOrganization.xml");
                                 organizationOut();
                             }
 
@@ -692,7 +693,7 @@ namespace iRestoUniVerse
                                 }
                                 XElement adress = org.Element("adress");
                                 adress.Value = childType.Text;
-                                organizationsXML.Save("configOrganization.xml");
+                                organizationsXML.Save(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\configOrganization.xml");
 
                                 organizationOut();
                             }
@@ -760,7 +761,7 @@ namespace iRestoUniVerse
             {
                 if (item.Type == FtpObjectType.Directory)
                 {
-                    if (item.Name.StartsWith("7.2") || item.Name.StartsWith("8."))
+                    if (item.Name.StartsWith("7.") || item.Name.StartsWith("8."))
                     {
                         iikoFTPTemp.Add(item.Name);
 
@@ -785,7 +786,7 @@ namespace iRestoUniVerse
         {
             System.Windows.Controls.Button tag = sender as System.Windows.Controls.Button;
             XDocument xdocFTP = new XDocument();
-            xdocFTP = XDocument.Load("configFTPIiko.xml");
+            xdocFTP = XDocument.Load(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\configFTPIiko.xml");
             XElement iikoFTPX = xdocFTP.Element("iikoFTP");
             XElement distrDir = iikoFTPX.Element("distrDir");
             if (distrDir.Value == "")
@@ -821,7 +822,7 @@ namespace iRestoUniVerse
                     }
                 });
                 XDocument xdocFTP = new XDocument();
-                xdocFTP = XDocument.Load("configFTPIiko.xml");
+                xdocFTP = XDocument.Load(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\configFTPIiko.xml");
                 XElement iikoFTPX = xdocFTP.Element("iikoFTP");
                 XElement distrDir = iikoFTPX.Element("distrDir");
 

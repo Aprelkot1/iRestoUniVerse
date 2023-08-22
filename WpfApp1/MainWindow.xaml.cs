@@ -82,24 +82,27 @@ namespace iRestoUniVerse
                     if (org.Element("comments") == null)
                     {
                         org.Add(new XElement("comments"));
+                      
                     } else
                     if (org.Element("tmpFolderOrg") == null)
                     {
                         org.Add(new XElement("tmpFolderOrg", Converter.ConvertToLatin(org.Attribute("name").Value.ToString())));
                     }
                 }
+               
                 xdocOrg.Save(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\configOrganization.xml");
             }
 
         }
         public void LoadXML()
         {
-            System.Windows.MessageBox.Show(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\configOrganization.xml");
-            if (!File.Exists(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "configOrganization.xml"))
+            
+            if (!File.Exists(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\configOrganization.xml"))
             {
                 XDocument newDocOrg = new XDocument();
                 newDocOrg.Add(new XElement("organizations"));
                 newDocOrg.Save(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\configOrganization.xml");
+                System.Windows.MessageBox.Show("Создаю");
             }
             if (!File.Exists(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\configFTPIiko.xml"))
             {
@@ -110,11 +113,11 @@ namespace iRestoUniVerse
                     new XElement("portableDir"));
                 newDocFTP.Save(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\configFTPIiko.xml");
             }
-            if (!File.Exists(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\configOrganization.xml"))
+            if (!File.Exists(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\configIikoVersion.xml"))
             {
                 XDocument newVerOrg = new XDocument();
                 newVerOrg.Add(new XElement("iikoVersions"));
-                newVerOrg.Save(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\configOrganization.xml");
+                newVerOrg.Save(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\configIikoVersion.xml");
             }
             //загружаем документ с версиями BackOffice
             xdocBackVer = XDocument.Load(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\configIikoVersion.xml");
